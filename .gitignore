@@ -1,0 +1,36 @@
+# Node dependencies
+node_modules/
+
+# Build output
+dist/
+
+# dotenv environment secrets
+.env
+
+# Local uploaded/generated files
+uploads/
+saved/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# IDE/editor directories and files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Mac .DS_Store files
+**/.DS_Store
+
+# Temporary files
+tmp/
+temp/
