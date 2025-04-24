@@ -6,9 +6,6 @@ import path from "path";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 
-import dotenv from "dotenv";
-dotenv.config();
-
 const app = express();
 
 app.use(express.json());

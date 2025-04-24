@@ -4,7 +4,7 @@ import axios from "axios";
 
 export class FileUtil {
   static async downloadAndSave(url: string, prompt: string): Promise<string> {
-    const SAVED_DIR = path.join(__dirname, "..", "saved");
+    const SAVED_DIR = path.resolve(process.cwd(), "saved");
     if (!fs.existsSync(SAVED_DIR)) fs.mkdirSync(SAVED_DIR, { recursive: true });
 
     const safePrompt = prompt.replace(/[^a-z0-9]/gi, "_").substring(0, 32);
