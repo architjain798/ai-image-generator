@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "OpenAI Image API",
+      "version": "1.0.0",
+      "description": "API for generating, editing, and varying images using OpenAI DALL·E"
+    },
+    "servers": [{ "url": "http://localhost:3000" }],
+    "paths": {
+      "/api/health": {
+        "get": { "summary": "Health check", "responses": { "200": { "description": "OK" } } }
+      },
+      "/api/generate-image": {
+        "post": {
+          "summary": "Generate image from prompt",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "prompt":   { "type": "string" },
+                    "n":        { "type": "integer", "default": 1 },
+                    "size":     { "type": "string",  "default": "1024x1024" },
+                    "model":    { "type": "string",  "default": "dall-e-3" },
+                    "quality":  { "type": "string",  "default": "standard" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": { "201": { "description": "Created" } }
+        }
+      },
+      "/api/edit-image": {
+        "post": {
+          "summary": "Edit uploaded image using a prompt",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "prompt": { "type": "string" },
+                    "image": { "type": "string", "format": "binary" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": { "201": { "description": "Edited" } }
+        }
+      },
+      "/api/generate-variations": {
+        "post": {
+          "summary": "Generate variations of uploaded image",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "image": { "type": "string", "format": "binary" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": { "201": { "description": "Variation created" } }
+        }
+      },
+      "/api/history": {
+        "get": { "summary": "Operation history (last 20 ops)", "responses": { "200": { "description": "OK" } } }
+      },
+      "/api/image/{id}": {
+        "get": {
+          "summary": "Get Image Details by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "integer" }
+            }
+          ],
+          "responses": { "200": { "description": "Found" }, "404": { "description": "Not found" } }
+        }
+      }
+    }
+  }
